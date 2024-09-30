@@ -2,8 +2,10 @@ package com.wedding.rsvp.dto;
 
 import com.wedding.rsvp.Guest;
 
+import java.util.UUID;
+
 public record GuestResponseDTO(
-        Long id,
+        UUID id,
         String name,
         boolean willAttend,
         String allergies,

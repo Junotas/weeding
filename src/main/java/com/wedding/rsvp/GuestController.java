@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/guests")
@@ -27,7 +28,7 @@ public class GuestController {
 
     @PutMapping("/{id}")
     public ResponseEntity<GuestResponseDTO> updateGuest(
-            @PathVariable Long id,
+            @PathVariable UUID id,
             @Valid @RequestBody GuestUpdateDTO guestUpdateDTO) {
         GuestResponseDTO response = guestService.updateGuest(id, guestUpdateDTO);
         return ResponseEntity.ok(response);
@@ -40,7 +41,7 @@ public class GuestController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteGuest(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteGuest(@PathVariable UUID id) {
         guestService.deleteGuest(id);
         return ResponseEntity.noContent().build();
     }

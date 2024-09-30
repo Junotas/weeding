@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,20 +21,30 @@ public class GuestService {
 
     @Transactional
     public GuestResponseDTO addGuest(GuestAddDTO guestAddDTO) {
-        Guest guest = guestAddDTO.toEntity();
+        Guest guest = new Guest(
+                guestAddDTO.name(),
+                guestAddDTO.willAttend(),
+                guestAddDTO.allergies(),
+                guestAddDTO.specialRequests(),
+                guestAddDTO.plusOne()
+        );
         guestRepository.save(guest);
         return GuestResponseDTO.fromEntity(guest);
     }
 
     @Transactional
-    public GuestResponseDTO updateGuest(Long id, GuestUpdateDTO guestUpdateDTO) {
+    public GuestResponseDTO updateGuest(UUID id, GuestUpdateDTO guestUpdateDTO) {
         Guest existingGuest = guestRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Guest not found"));
 
-        Guest updatedGuest = guestUpdateDTO.toEntity(id);
-        guestRepository.save(updatedGuest);
+        existingGuest.setName(guestUpdateDTO.name());
+        existingGuest.setWillAttend(guestUpdateDTO.willAttend());
+        existingGuest.setAllergies(guestUpdateDTO.allergies());
+        existingGuest.setSpecialRequests(guestUpdateDTO.specialRequests());
+        existingGuest.setPlusOne(guestUpdateDTO.plusOne());
 
-        return GuestResponseDTO.fromEntity(updatedGuest);
+        guestRepository.save(existingGuest);
+        return GuestResponseDTO.fromEntity(existingGuest);
     }
 
     public List<GuestResponseDTO> getAllGuests() {
@@ -43,7 +54,7 @@ public class GuestService {
     }
 
     @Transactional
-    public void deleteGuest(Long id) {
+    public void deleteGuest(UUID id) {
         if (!guestRepository.existsById(id)) {
             throw new IllegalArgumentException("Guest not found");
         }

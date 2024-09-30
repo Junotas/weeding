@@ -5,21 +5,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.util.UUID;
+
 @Entity
 public class Guest {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
     private String name;
-
     private boolean willAttend;
-
     private String allergies;
-
     private String specialRequests;
-
     private boolean plusOne;
 
     // Default constructor
@@ -35,11 +33,11 @@ public class Guest {
     }
 
     // Getters and setters
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
