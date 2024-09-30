@@ -41,4 +41,12 @@ public class GuestService {
                 .map(GuestResponseDTO::fromEntity)
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public void deleteGuest(Long id) {
+        if (!guestRepository.existsById(id)) {
+            throw new IllegalArgumentException("Guest not found");
+        }
+        guestRepository.deleteById(id);
+    }
 }

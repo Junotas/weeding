@@ -38,4 +38,10 @@ public class GuestController {
         List<GuestResponseDTO> guests = guestService.getAllGuests();
         return ResponseEntity.ok(guests);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteGuest(@PathVariable Long id) {
+        guestService.deleteGuest(id);
+        return ResponseEntity.noContent().build();
+    }
 }
