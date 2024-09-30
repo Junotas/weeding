@@ -1,4 +1,4 @@
-package com.weeding.rsvp;
+package com.wedding.rsvp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

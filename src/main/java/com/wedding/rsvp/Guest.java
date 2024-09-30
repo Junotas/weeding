@@ -1,4 +1,4 @@
-package com.weeding.rsvp;
+package com.wedding.rsvp;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

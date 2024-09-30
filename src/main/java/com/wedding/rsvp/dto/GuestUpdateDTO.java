@@ -1,4 +1,4 @@
-package com.weeding.rsvp.dto;
+package com.wedding.rsvp.dto;
 
 public record GuestUpdateDTO() {
 }
